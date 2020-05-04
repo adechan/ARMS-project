@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import pandas as pd 
 articleUrls=[]
-import Crawler
+# import Crawler
 
 def searchArticleUrls(path):
     links=open(path,"r")
@@ -27,12 +27,24 @@ def searchAWorld(string):
                     article_title=a.find("h1").text[0:]
                     print(category)
                     records.append((string,category,article_title,date))
-                except:
-                    pass
+                # except:
+                #     pass
         except:
             pass
-    df = pd.DataFrame(records, columns=['string', 'category', 'article_title', 'date'])
-    df.to_csv('category.csv', index=False, encoding='utf-8')
+    # df = pd.DataFrame(records, columns=['string', 'category', 'article_title', 'date'])
+    # df.to_csv('category.csv', index=False, encoding='utf-8')
+    return records
+
+
+def categories(records):
+    d = dict()
+    for record in records:
+        if record[1] not in d:
+            d[record[1]] = 1
+        else:
+            d[record[1]] += 1
+    return d
+
 
 if __name__ == "__main__":
     searchAWorld("Trump")
