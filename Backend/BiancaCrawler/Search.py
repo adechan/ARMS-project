@@ -1,7 +1,7 @@
 import urllib.request
 from bs4 import BeautifulSoup
 import json
-import pandas as pd 
+# import pandas as pd
 articleUrls=[]
 # import Crawler
 
@@ -14,7 +14,10 @@ def searchArticleUrls(path):
 def searchAWorld(string):
     searchArticleUrls("Urls.txt")
     records=[]
+    i = 0
     for url in articleUrls:
+        i += 1
+        print(f'{i}/{len(articleUrls)}')
         try:
             request = urllib.request.Request(url)
             html = urllib.request.urlopen(request).read()
@@ -22,7 +25,9 @@ def searchAWorld(string):
             article_body=soup.find_all('div',attrs={'id':'app'})
             for a in article_body:
                 if string in str(a):
-                    date=a.find('time').text[0:-1]
+                    date=a.find('time').text
+                    if 'Published ' in date:
+                        date = date.sub(len('Published '))
                     category=a.find("a",attrs={'class':'css-nuvmzp'}).text[0:]
                     article_title=a.find("h1").text[0:]
                     print(category)
