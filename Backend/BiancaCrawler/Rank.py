@@ -6,7 +6,7 @@ import string
 from nltk.tokenize import word_tokenize
 from nltk.tokenize import RegexpTokenizer
 
-
+# get top 3 words met in a category
 def sort(dates, records, categoryName):
     print(f'{len(dates)} dates loaded')
     # print(f'{len(records)} records loaded')
