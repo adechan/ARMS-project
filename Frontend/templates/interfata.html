@@ -95,6 +95,21 @@
                 margin-left:10em;
                 margin-top:1em;
             }
+
+            .ranking .button
+            {
+                height: 2em;
+                width: 5em;
+                margin-left: 1em;
+                margin-top: -1.8em;
+                border-radius: 5px;
+                background-color: #1abc9c;
+            }
+            div .ranking
+            {
+                margin-left:10em;
+                margin-top:1em;
+            }
         </style>
     </head>
     <body>
@@ -114,7 +129,45 @@
         </form>
 
         <div class="piechart" id="piechart"></div>
-    <table class="centered thick-border">
+
+        <div class="ranking" id = "ranking">
+
+        <form class="ranking" action="/rank" method="post">
+
+            <label for="ranking"> Ranking based on: </label>
+<!--            <select id = "categories" name = "categories">-->
+<!--                <option value ="Elections">Elections</option>-->
+<!--                <option value ="Economy">Economy</option>-->
+<!--                <option value ="Elections">Elections</option>-->
+<!--                <option value ="Politics">Politics</option>-->
+<!--                <option value ="Media">Media</option>-->
+<!--                <option value ="Health">Health</option>-->
+<!--                <option value ="World">World</option>-->
+<!--                <option value ="Television">Television</option>-->
+<!--                <option value ="Fashion">Fashion</option>-->
+<!--                <option value ="Style">Style</option>-->
+<!--                <option value ="Arts">Arts</option>-->
+<!--                <option value ="U.S.">U.S.</option>-->
+<!--                <option value ="Travel">Travel</option>-->
+<!--                <option value ="Science">Science</option>-->
+<!--                <option value ="Nature">Nature</option>-->
+<!--                <option value ="Health">Health</option>-->
+<!--                <option value ="Music">Music</option>-->
+
+<!--            </select>-->
+                <select id = "categories" name = "categories">
+                    {% for data in records %}
+                    <option value = {{ data }}> {{data }} </option>
+                    {% endfor %}
+                </select>
+            <input class="button" type="submit" value="Search">
+            {% for data in rankings %}
+                <p> {{ data }} </p>
+             {% endfor %}
+        </form>
+        </div>
+
+        <table class="centered thick-border">
                 <tr>
                     <th>String</th>
                     <th>Category</th>
@@ -129,6 +182,8 @@
                         <td>{{ record[3] }}</td>
                     </tr>
                 {% endfor %}
-            </table>
+        </table>
+
+
     </body>
 </html>
