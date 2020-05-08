@@ -4,6 +4,7 @@ import json
 # import pandas as pd
 articleUrls=[]
 # import Crawler
+import re
 
 def searchArticleUrls(path):
     links=open(path,"r")
@@ -11,7 +12,7 @@ def searchArticleUrls(path):
         articleUrls.append(link)
 
 
-def searchAWorld(string):
+def searchAWord(string):
     searchArticleUrls("Urls.txt")
     records=[]
     i = 0
@@ -26,6 +27,8 @@ def searchAWorld(string):
             for a in article_body:
                 if string in str(a):
                     date=a.find('time').text
+                    regex = re.findall(r"[A-Z][a-z]+,?\s+(?:[A-Z][a-z]*\.?\s*)?[A-Z][a-z]+", str(a))
+                    print(regex)
                     if 'Published ' in date:
                         date = date.sub(len('Published '))
                     category=a.find("a",attrs={'class':'css-nuvmzp'}).text[0:]
@@ -52,6 +55,6 @@ def categories(records):
 
 
 if __name__ == "__main__":
-    searchAWorld("Trump")
+    searchAWord("Trump")
 
 

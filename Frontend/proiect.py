@@ -17,7 +17,7 @@ def rank():
     print("category name: " + categoryName)
 
     if dates is None:
-        datelist = Search.searchAWorld('coronavirus')
+        datelist = Search.searchAWord('coronavirus')
     else:
         datelist = dates
 
@@ -44,7 +44,7 @@ def getValue():
     # with open('records.json', 'r') as recordsFile:
     #     records = json.load(recordsFile)
 
-    dates = Search.searchAWorld(name)
+    dates = Search.searchAWord(name)
     print('dates loaded')
 
     records = Search.categories(dates)
